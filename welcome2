@@ -14,11 +14,12 @@ void usage(const string& cmd)
         "where\n",
         " -h host      the host name.\n",
         " -v visitor   the guest name.\n",
+	" -?           help\n",
     };
 
     cout << "usage: \n";
     cout << "  " << cmd << " -h host -v visitor\n";
-    cout << "  " << cmd << " -? => usage\n";
+    cout << "  " << cmd << " -?\n";
     
     for (int i = 0; i < (sizeof(opt) / sizeof(string)); i++)
 	{
