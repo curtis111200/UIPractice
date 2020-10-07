@@ -18,7 +18,8 @@ void usage(const string& cmd)
 
     cout << "usage: \n";
     cout << "  " << cmd << " -h host -v visitor\n";
-
+    cout << "  " << cmd << " -? => help\n";
+    
     for (int i = 0; i < (sizeof(opt) / sizeof(string)); i++)
 	{
         cout << opt[i];
