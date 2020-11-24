@@ -4,7 +4,6 @@
 #include <sstream>
 #include <string>
 
-
 void error(const std::string& cmd, const std::string& msg) {
     std::cout << "Error: " << msg << std::endl;
     std::cout << " type '" << cmd << " -?' to see usage." << std::endl;
@@ -12,15 +11,20 @@ void error(const std::string& cmd, const std::string& msg) {
     exit(-1);
 }
 
-
-void numInBase(const std::string& dec, const std::string& base, const std::string& num)
-{
-    std::cout << "Decimal number " << dec << "in" << base << ":" << num << std::endl;
+void numInBase(
+    const std::string& dec,
+    const std::string& base,
+    const std::string& num
+) {
+    std::cout
+        << "Decimal number "
+        << dec
+        << base
+        << num
+        << std::endl;
 }
 
-
-std::string dec2bin(const std::string& dec)
-{
+std::string dec2bin(const std::string& dec) {
     std::stringstream bin;
 
     bin << std::bitset<16>(std::stoi(dec));
@@ -28,11 +32,9 @@ std::string dec2bin(const std::string& dec)
     numInBase(dec, " in 16 bits binary: ", bin.str());
 
     return bin.str();
-} 
+}
 
-
-std::string dec2hex(const std::string& dec)
-{
+std::string dec2hex(const std::string& dec) {
     std::stringstream hex;
 
     hex << "0x" << std::hex << std::stoi(dec);
@@ -40,11 +42,9 @@ std::string dec2hex(const std::string& dec)
     numInBase(dec, " in hexadecimal: ", hex.str());
 
     return hex.str();
-} 
+}
 
-
-std::string dec2oct(const std::string& dec)
-{
+std::string dec2oct(const std::string& dec) {
     std::stringstream oct;
 
     oct << "0" << std::oct << std::stoi(dec);
@@ -52,17 +52,23 @@ std::string dec2oct(const std::string& dec)
     numInBase(dec, " in octal: ", oct.str());
 
     return oct.str();
-} 
+}
 
+void numInDec(
+    const std::string& base,
+    const std::string& num,
+    const std::string& dec
+) {
+    std::cout
+        << base
+        << " number "
+        << num
+        << " in decimal: "
+        << dec
+        << std::endl;
+}
 
-void numInDec(const std::string& base, const std::string& num, const std::string& dec)
-{
-    std::cout << base << " number " << num << " in decimal: " << dec << std::endl;
-} 
-
-
-std::string bin2dec(const std::string& bin)
-{
+std::string bin2dec(const std::string& bin) {
     std::stringstream dec;
 
     dec << std::stol(bin, nullptr, 2);
@@ -70,11 +76,9 @@ std::string bin2dec(const std::string& bin)
     numInDec("Binary", bin, dec.str());
 
     return dec.str();
-} 
+}
 
-
-std::string oct2dec(const std::string& oct)
-{
+std::string oct2dec(const std::string& oct) {
     std::stringstream dec;
 
     dec << std::stol(oct, nullptr, 8);
@@ -82,11 +86,9 @@ std::string oct2dec(const std::string& oct)
     numInDec("Octal", oct, dec.str());
 
     return dec.str();
-} 
+}
 
-
-std::string hex2dec(const std::string& hex)
-{
+std::string hex2dec(const std::string& hex) {
     std::stringstream dec;
 
     dec << std::stol(hex, nullptr, 16);
@@ -96,9 +98,7 @@ std::string hex2dec(const std::string& hex)
     return dec.str();
 }
 
-
-bool is_number(const std::string& str, int base = 10)
-{
+bool is_number(const std::string& str, int base = 10) {
     size_t sz;
 
     try {
@@ -109,11 +109,9 @@ bool is_number(const std::string& str, int base = 10)
     }
 
     return (sz == str.length());
-} 
+}
 
-
-bool test_dec_bin(const std::string& cmd, const std::string& dec)
-{
+bool test_dec_bin(const std::string& cmd, const std::string& dec) {
     std::string bin;
     std::string num;
 
@@ -128,9 +126,7 @@ bool test_dec_bin(const std::string& cmd, const std::string& dec)
     return (dec == num);
 } 
 
-
-bool test_dec_hex(const std::string& cmd, const std::string& dec)
-{
+bool test_dec_hex(const std::string& cmd, const std::string& dec) {
     std::string hex;
     std::string num;
 
@@ -143,11 +139,9 @@ bool test_dec_hex(const std::string& cmd, const std::string& dec)
     std::cout << std::endl;
 
     return (dec == num);
-} 
+}
 
-
-bool test_dec_oct(const std::string& cmd, const std::string& dec)
-{
+bool test_dec_oct(const std::string& cmd, const std::string& dec) {
     std::string oct;
     std::string num;
 
@@ -162,19 +156,15 @@ bool test_dec_oct(const std::string& cmd, const std::string& dec)
     return (dec == num);
 }
 
-
-void sample_usage(const std::string& cmd, const std::string& dec)
-{
+void sample_usage(const std::string& cmd, const std::string& dec) {
     std::cout << "Examples: " << std::endl << std::endl;
 
     test_dec_bin(cmd, dec) ? (void)0 : error(cmd, "Dec-Bin converting error!");
     test_dec_hex(cmd, dec) ? (void)0 : error(cmd, "Dec-Hex converting error!");
     test_dec_oct(cmd, dec) ? (void)0 : error(cmd, "Dec-Oct converting error!");
-} // sample_usage()
+}
 
-
-void usage(const std::string& cmd)
-{
+void usage(const std::string& cmd) {
     std::string num;
 
     std::cout << cmd << " v0.1.0 " << std::endl;
@@ -190,11 +180,9 @@ void usage(const std::string& cmd)
     std::cout << std::endl;
 
     sample_usage(cmd, "101");
-} // usage()
-
+}
 
 void args_dump(int argc, char* argv[]) {
-    // 列印所有的 *命令列參數*
     std::cout << "command line arguments: argv[i]" << std::endl;
 
     for (int i = 0; i < argc; i++) {
@@ -205,51 +193,66 @@ void args_dump(int argc, char* argv[]) {
     }
 }
 
-/**
- *  程式進入點。
- *
- *  @param const int argc           命令列參數個數
- *  @param const char *argv[]       命令列參數陣列
- *  @return int
- *  @since  0.1.0
- **/
 int main(int argc, char* argv[])
 {
-    std:: string arg = argv[1];
+    std::string arg;
+    std::string num;
 
-    if (argc != 2 && argc != 3)
+    if (argc !=2 && argc !=3)
     {
-        error( argv[0], "Wrong number of or wrong argumemts.");
+        error( argv[0], " Wrong number of or wrong arguments.");
     }
-    else if (argc == 2)
-    {
-        if (arg == "-?")
-            usage(argv[0]);
-        else
-            error(argv[0], "Wrong number of or wrong argumemts.");
-    }
+    if (argc == 2)
+        {
+            arg = argv[1];
+
+            if (arg == "-?")
+            {
+                usage(argv[0]);
+            }
+            else
+            {
+                error( argv[0], "Wrong number of or wrong arguments.");
+            }
+        }
     else if (argc == 3)
     {
-        if (arg == "-h") {
-            dec2hex(argv[2]);
+        arg = argv[1];
+        num = argv[2];
+
+        if (arg == "-h")
+        {
+            dec2hex(num);
         }
-        else if (arg == "-o") {
-            dec2oct(argv[2]);
+        else if (arg == "-o")
+        {
+            dec2oct(num);
         }
-        else if (arg == "-b") {
-            dec2bin(argv[2]);
+        else if (arg == "-b")
+        {
+            dec2bin(num);
         }
-        else if (arg == "-H") {
-            hex2dec(argv[2]);
+        else if (arg == "-H")
+        {
+            hex2dec(num);
         }
-        else if (arg == "-O") {
-            oct2dec(argv[2]);
+         else if (arg == "-O")
+        {
+            oct2dec(num);
         }
-        else if (arg == "-B") {
-            bin2dec(argv[2]);
+        else if (arg == "-B")
+        {
+            bin2dec(num);
         }
-        else {
-            error(argv[0], "Wrong number of or wrong argumemts.");
+        else if (arg == "-x")
+        {
+            sample_usage( argv[0], num);
+        }
+        else
+        {
+            error( argv[0], " Wrong number of or wrong arguments.");
         }
     }
+
+    return 0;
 }
